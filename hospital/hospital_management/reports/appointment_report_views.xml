@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <template id="appointment_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                            <!-- <t t-esc="o"/> -->
+                            <!-- Patient Information -->
+                            <div style="text-align:center; margin-bottom:20px;">
+                                <h1>Appointment Report</h1>
+                                <p>Hospital Management System</p>
+                                <p>Generated on: <span t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/></p>
+                            </div>
+                            <hr/>
+                            <div class="row" style="margin-bottom: 20px;">
+                                <h5 style="text-align:left;">
+                                    <strong>Patient: </strong> <span t-field="o.patient_id"/>
+                                </h5>
+                            </div>
+                            <!-- Appointments Table -->
+                            <div class="row">
+                                <table class="table table-condensed" style="width:100%; border:1px solid #ddd; border-collapse:collapse;">
+                                    <thead style="background-color:#f2f2f2; border:1px solid #ddd;">
+                                        <tr>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Appointment Name</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Appointment Date</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Doctor</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Status</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Notes</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                <span t-field="o.name"/>
+                                            </td>
+                                            <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                <span t-field="o.appointment_date"/>
+                                            </td>
+                                            <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                <span t-field="o.doctor_id.name"/>
+                                            </td>
+                                            <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                <span t-field="o.state"/>
+                                            </td>
+                                            <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                <span t-field="o.notes"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Appointment Details -->
+                            <hr/>
+                            <div style="text-align:center; margin-bottom:20px;">
+                                <h4>Appointment Details</h4>
+                            </div>
+                            <div class="row">
+                                <table class="table table-condensed" style="width:100%; border:1px solid #ddd; border-collapse:collapse;">
+                                    <thead style="background-color:#f2f2f2; border:1px solid #ddd;">
+                                        <tr>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Medicine</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Morning</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Afternoon</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Night</strong></th>
+                                            <th style="text-align:left; padding:8px; border:1px solid #ddd;"><strong>Total Quantity</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.appointment_lines" t-as="line">
+                                            <tr>
+                                                <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                    <span t-field="line.product_id.name"/>
+                                                </td>
+                                                <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                    <input type="checkbox" t-att-checked="line.morn and 'checked' or None" disabled="disabled"/>
+                                                </td>
+                                                <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                    <input type="checkbox" t-att-checked="line.noon and 'checked' or None" disabled="disabled"/>
+                                                </td>
+                                                <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                    <input type="checkbox" t-att-checked="line.eve and 'checked' or None" disabled="disabled"/>
+                                                </td>
+                                                <td style="text-align:left; padding:8px; border:1px solid #ddd;">
+                                                    <span t-field="line.product_qty"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    <div class="footer" style="text-align:center; margin-top:20px;">
+                        <hr style="border: 2px solid black;"/>
+                        <p>Hospital Management System | Confidential</p>
+                        <p>Page 1/1</p>
+                    </div>
+                </t>    
+            </t>
+        </t>
+    </template>
+
+        <!-- <record id="action_hospital_appointment_report" model="ir.actions.report">
+            <field name="name">Appointment Report</field>
+            <field name="model">create.appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hospital_management.appointment_report</field>
+            <field name="report_file">hospital_management.appointment_report</field>
+            <field name="attachment"/>
+            <field name="binding_model_id" ref="hospital_management.model_create_appointment"/>
+            <field name="binding_type">report</field>
+        </record> -->
+
+        <record id="action_appointment_report_hospital" model="ir.actions.report">
+            <field name="name">Appointment Report</field>
+            <field name="model">hospital.appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hospital_management.appointment_report</field>
+            <field name="report_file">hospital_management.appointment_report</field>
+            <field name="attachment"/>
+            <field name="binding_model_id" ref="hospital_management.model_create_appointment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+</odoo>

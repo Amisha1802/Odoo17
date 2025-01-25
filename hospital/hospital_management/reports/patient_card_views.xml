@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_patient_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <center>
+                            <h1 style="margin-top: 10px; font-size: 22px; color: #333;">
+                                <strong>Patient Card</strong>
+                            </h1>
+                        </center>                        
+                        <br/>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table table-condensed" style="width: 100%;">
+                                    <tr style="border:1px solid black">
+                                        <td rowspan='2' style="text-align:center; vertical-align:middle; ">
+                                                <h3>
+                                                    <span t-field="o.patient_name"/>
+                                                </h3>    
+                                        </td>
+                                        <!-- <td width="60%"> -->
+                                            <!-- <table class="table table-condensed" style="width: 100%; height: 100%; vertical-align: middle; margin-bottom: 0;"> -->
+                                        <td style="text-align:right; font-weight: bold;">Age:</td>
+                                        <td style="padding-left: 10px;"><span t-field="o.patient_age"/></td>
+                                                
+                                            <!-- </table> -->
+                                        <!-- </td> -->
+                                    </tr>
+                                    <tr style="border:1px solid black">
+                                        <td style="text-align:right; font-weight: bold;">Doctor:</td>
+                                        <td style="padding-left: 10px;"><span t-field="o.doctor_id"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table table-condensed" style="width: 100%; margin-top: 10px; border: 1px solid black;">
+                                    <tr>
+                                        <td style="text-align: left; font-size: 12px;">
+                                            <strong>Generated on:</strong>
+                                            <t t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/>
+                                        </td>
+                                        <td style="text-align: left; font-size: 12px;">
+                                            <strong>Expiration Period: </strong> 1 Month
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_patient_card" model="ir.actions.report">
+        <field name="name">Patient Card</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hospital_management.report_patient_card</field>
+        <field name="report_file">hospital_management.report_patient_card</field>
+        <field name="attachment"/>
+        <field name="binding_model_id" ref="hospital_management.model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

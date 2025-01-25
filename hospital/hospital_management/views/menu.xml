@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<menuitem id="hospital_root" 
+		name="Hospital" 
+		sequence="1" 
+	/>
+        <menuitem id="menu_dashboard"
+            name="Dashboard"
+            parent="hospital_root"
+            action="hospital_dashboard"
+            sequence="10"
+        />
+    
+    	<menuitem id="hospital_patient" 
+    		name="Patients" 
+    		parent="hospital_root" 
+    		action="action_patient" 
+    		sequence="20"
+    	/>
+
+    	<menuitem id="hospital_doctor" 
+    		name="Doctor" 
+    		parent="hospital_root" 
+    		action="action_doctor" 
+    		sequence="30"
+    	/>
+
+    	<menuitem id="hospital_appointment" 
+    		name="Appointments" 
+    		parent="hospital_root"
+    		action="action_appointment" 
+    		sequence="40"
+    	/>
+
+    	<menuitem id="hospital_lab" 
+    		name="Lab" 
+    		parent="hospital_root"
+            action="action_lab" 
+            sequence="50"
+        />
+
+    	<menuitem id="create_appointment" 
+    		name="Create Appointment" 
+    		parent="hospital_root"
+            action="action_create_appointment_wizard" 
+            sequence="60"
+        />
+
+</odoo>	
