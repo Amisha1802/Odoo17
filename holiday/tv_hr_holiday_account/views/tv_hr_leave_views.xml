@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="view_hr_leave_form_inherit" model="ir.ui.view">
+		    <field name="name">hr.leave.form.inherit</field>
+		    <field name="model">hr.leave</field>
+		    <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager" />
+		    <field name="arch" type="xml">
+		        <xpath expr="//sheet" position="inside">
+			        	<div class="oe_button_box" name="button_box">
+			        		<field name="move_id" invisible="1" />
+	                        <button string="Journal Entry" name="action_view_journal_entry" type="object" class="oe_stat_button" icon="fa-bars" groups="account.group_account_manager" invisible="move_id == 0"/>  
+	                    </div>
+			        </xpath>
+	            <xpath expr="//sheet" position="before">
+		            <div class="alert alert-warning" role="alert" invisible="not employee_warning_message">
+						<strong>Warning:</strong>
+		                <field name="employee_warning_message" readonly="1"/>
+		            </div>
+		        </xpath>
+		    </field>
+		</record>
+	</data>
+</odoo>
+make a model to store the imported datafile and creates log

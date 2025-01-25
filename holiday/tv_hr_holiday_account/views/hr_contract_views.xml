@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit HR Contract Form View -->
+    <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+        <field name="name">hr.contract.form.inherit.analytic.distribution</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+          	<xpath expr="//notebook/page/group[@name='notes_group']" position="before">
+                <group>
+                    <field name="analytic_distribution" string= "Analytic Distribution" widget="analytic_distribution"  groups="analytic.group_analytic_accounting"/>  
+                    <!-- options="{'force_applicability': 'optional', 'disable_save': true}" class="w-50" -->
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

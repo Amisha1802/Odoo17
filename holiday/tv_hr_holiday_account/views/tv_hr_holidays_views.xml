@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hr_leave_type_form_inherit" model="ir.ui.view">
+        <field name="name">hr.leave.type.form.inherit</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/group[@name='negative_cap']" position="after">
+                <group string="Accounting">
+                    <field name="is_generate_accounting_entry"/>
+                    <field name="leave_expense_account_id" invisible="is_generate_accounting_entry != 1"/>
+                    <field name="leave_provision_account_id" invisible="is_generate_accounting_entry != 1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
