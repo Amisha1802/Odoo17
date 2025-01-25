@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='has_work_permit']" position="after">
+                    <!-- Add the new fields below the has_work_permit field -->
+                    <field name="original_hire_date" />
+                    <field name="registration_number" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

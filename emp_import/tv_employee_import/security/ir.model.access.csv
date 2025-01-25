@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+tv_employee_import.access_import_employees,access_import_employees,tv_employee_import.model_import_employees,base.group_user,1,1,1,1
+tv_employee_import.access_import_log,access_import_log,tv_employee_import.model_import_log,base.group_user,1,1,1,1

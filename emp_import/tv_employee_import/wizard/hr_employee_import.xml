@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+        <!-- Define an action to open the wizard -->
+        <record id="action_employee_import" model="ir.actions.act_window">
+            <field name="name">Import Employees</field>
+            <field name="res_model">import.employees</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Define the form view for the wizard -->
+        <record id="view_employee_import_form" model="ir.ui.view">
+            <field name="name">employee.import.form</field>
+            <field name="model">import.employees</field>
+            <field name="arch" type="xml">
+                <form string="Import Employees">
+                    <group>
+                        <field name="file" filename="file_name" invisible='import_warning'/>
+                        <field name="name_format" invisible='import_warning'/>
+                        <field name="partner_update" invisible='import_warning'/>
+                        <field name="user_create" invisible='import_warning'/>
+                        <field name="import_warning" invisible='not import_warning'/>
+                    </group>
+                    <footer>
+                        <button string="Import" type="object" name="do_import_employees" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Define a menu item to access the wizard -->
+        <menuitem id="menu_employee_import" 
+                name="Import Employees" 
+                parent="hr.menu_hr_root" 
+                action="action_employee_import" />
+
+    </data>
+</odoo>
