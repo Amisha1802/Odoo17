@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="portal_my_home_appointment" name="Portal My Home: appointment entries" inherit_id="portal.portal_my_home" priority="40">
+    <template id="portal_my_home_menu_appointmentt" name="Portal layout: Appointments" inherit_id="portal.portal_breadcrumbs" priority="40">
+        <xpath expr="//ol[contains(@class, 'o_portal_submenu')]" position="inside">
+            <li id="portal_breadcrumbs_appointment" 
+                t-if="page_name == 'appointments'" 
+                class="breadcrumb-item active">
+                <a t-att-href="'/my/appointments?%s' % keep_query()">Supplier Tickets</a>
+            </li>
+        </xpath>
+    </template>
+
+    <!-- <template id="portal_my_home_appointment" name="Portal My Home: appointment entries" inherit_id="portal.portal_my_home" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-if="appointment_count" t-call="portal.portal_docs_entry">
                 <t t-set="title">Appointment</t>
@@ -9,6 +19,21 @@
                 <t t-set="count" t-value="appointment_count"/>
             </t>
         </xpath>
+    </template> -->
+
+    <template id="portal_my_home_appointment" name="Portal My Home: appointment entries" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_service_category" position="inside">
+            <t t-if="appointment_count" t-call="portal.portal_docs_entry">
+                <!-- <t t-set="icon" t-value="'/ticket_management/static/src/img/suppliers.jpeg'"/> -->
+                <t t-set="title">Appointments</t>
+                <t t-set="url" t-value="'/my/appointments'"/>
+                <t t-set="text">View and manage your Appointments</t>
+                <t t-set="placeholder_count" t-value="'appointment_count'"/>
+            </t>
+        </div>
     </template>
 
      <template id="portal_my_appointments" name="My Appointments">
@@ -25,7 +50,7 @@
                     <t t-foreach="appointments" t-as="app">
                         <tr>
                             <td>
-                                <a t-attf-href="/my/task/#{app.id}?{{ keep_query() }}"><span t-field="app.name"/></a>
+                                <a t-attf-href="/my/appointments/#{app.id}?{{ keep_query() }}"><span t-field="app.name"/></a>
                             </td>
                             <td class="text-center">
                                 <span class="badge badge-pill badge-info"/>
@@ -39,5 +64,49 @@
             </t>
         </t>
     </template>
+
+    <template id="portal_appointments_template" name="Appointments">
+        <t t-call="website.layout">
+            <div class="container">
+                <h1>Appointments</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Appointment Date</th>
+                            <th>Patient Name</th>
+                            <th>Age</th>
+                            <th>DOB</th>
+                            <th>Doctor</th>
+                            <!-- <th>Destination Airport</th> -->
+                            <!-- <th>Stage</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="tickets" t-as="ticket">
+                            <tr>
+                                <td><a t-att-href="'/my/appointments/%d' % appointment.id"><t t-esc="appointment.patient_id"/></a></td>
+                                <td><t t-esc="appointment.appointment_date"/></td>
+                                <td><t t-esc="appointment.patient_id"/></td>
+                                <td><t t-esc="appointment.patient_age"/></td>
+                                <td><t t-esc="appointment.date_of_birth"/></td>
+                                <td><t t-esc="appointment.doctor_id"/></td>
+                                <!-- <td><t t-esc="ticket.stage"/></td> -->
+                                <!-- <td><t t-esc="ticket.stage"/></td> -->
+
+                                <field name="patient_id"/>
+                    <field name="appointment_date"/>
+                    <field name="patient_id"/>
+                    <field name="patient_age"/>
+                    <field name="date_of_birth"/>
+                    <field name="doctor_id"/>
+                    <!-- <field name="remaining_seats"/> -->
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
 
 </odoo>

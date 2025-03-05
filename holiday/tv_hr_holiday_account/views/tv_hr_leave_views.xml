@@ -22,4 +22,3 @@
 		</record>
 	</data>
 </odoo>
-make a model to store the imported datafile and creates log
