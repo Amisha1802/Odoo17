@@ -8,8 +8,9 @@
 		    <field name="arch" type="xml">
 		        <xpath expr="//sheet" position="inside">
 			        	<div class="oe_button_box" name="button_box">
-			        		<field name="move_id" invisible="1" />
-	                        <button string="Journal Entry" name="action_view_journal_entry" type="object" class="oe_stat_button" icon="fa-bars" groups="account.group_account_manager" invisible="move_id == 0"/>  
+	                        <button string="Journal Entry" name="action_view_journal_entry" type="object" class="oe_stat_button" icon="fa-bars" groups="account.group_account_manager" invisible="move_id == 0">  
+			        			<field name="move_id" invisible="1" />
+			        		</button>
 	                    </div>
 			        </xpath>
 	            <xpath expr="//sheet" position="before">
