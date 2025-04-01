@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!--Tree view of notes type-->
+	<record id="view_notes_type_tree" model="ir.ui.view">
+		<field name="name">notes.type.tree</field>
+        <field name="model">notes.type</field>
+        <field name="arch" type="xml">
+        	<tree string="Notes Type" editable="bottom">
+        		<field name="name"/>
+        	</tree>
+        </field>
+    </record>
+
+    <!-- Action of the Note Type -->
+	<record id="action_notes_type" model="ir.actions.act_window">
+	    <field name="name">Notes Type</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">notes.type</field>
+	    <field name="view_mode">tree</field>
+	    <field name="context">{}</field>
+	    <field name="help" type="html">
+	      <p class="o_view_nocontent_smiling_face">
+	        Create your First Note Type!
+	      </p>
+	    </field>
+	</record>
+
+	<!-- Menu Item of Note Type -->
+	<menuitem id="menu_notes_types"
+	    name="Note Types"
+	    parent="contacts.res_partner_menu_config"
+	    action="tv_contact_notes.action_notes_type"
+	    sequence="20"/>
+
+
+    <!-- Inherit Contact Form View -->
+    <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.notes</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+          	<xpath expr="//notebook" position="inside">
+          		<page string = "Notes">
+	                <field name="note_type_ids" widget="one2many_list">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <!-- <field name="note_type"/> -->
+                            <field name="task_id"/>
+                            <field name="notes" widget="html"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </tree>
+                    </field>
+	            </page>
+          	</xpath>
+      	</field>
+  	</record>
+
+    <!-- Inherit Project Task Form -->
+    <record id="view_task_form_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.contact</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <!-- Add Magic Button to Contact -->
+            <xpath expr="//div[@class='oe_button_box']" position="inside">
+                <button name="action_open_related_contact" type="object" class="oe_stat_button" icon="fa-user" invisible="not partner_id">
+                    <div>
+                        <span>Related Contact</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+  	
+</odoo>

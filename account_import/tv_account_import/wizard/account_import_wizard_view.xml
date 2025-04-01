@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Action for Wizard -->
+        <record id="action_account_move_import_wizard" model="ir.actions.act_window">
+            <field name="name">Import Account Move</field>
+            <field name="res_model">import.journal.entries</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <!-- Form View for Wizard -->
+        <record id="account_move_import_wizard_form" model="ir.ui.view">
+            <field name="name">import.journal.entries.form</field>
+            <field name="model">import.journal.entries</field>
+            <field name="arch" type="xml">
+                <form string="Import Account Moves from JSON">
+                    <group>
+                        <field name="json_file" filename="file_name" widget="binary" />
+                    </group>
+                    <footer>
+                        <button string="Import" type="object" name="action_import_journals" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Menu for Wizard -->
+        <menuitem id="menu_account_move_import" 
+            name="Import Account" 
+            parent="account.menu_finance" 
+            action="action_account_move_import_wizard"/>
+
+    </data>
+</odoo>
