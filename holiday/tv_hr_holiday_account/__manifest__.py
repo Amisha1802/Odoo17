@@ -2,7 +2,7 @@
     'name': 'TV HR Holidays Account',
     'version': '1.0',
     'summary': 'Generate accounting entries for leave allocations and usage',
-    'author': 'Invoertis Solutions',
+    'author': 'Techvertis',
     'category': 'Human Resources',
     'depends': ['base', 'hr_holidays', 'account', 'analytic'],  # Ensure all dependencies are updated
     'data': [

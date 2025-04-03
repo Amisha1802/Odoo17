@@ -2,7 +2,7 @@
     'name': 'TV Contact Notes',
     'version': '1.0',
     'summary': 'Custom module to add notes with attachments to contacts',
-    'author': 'Invoertis Solutions',
+    'author': 'Techvertis',
     'category': 'Contacts',
     'depends': ['base', 'contacts', 'project'],  # Ensure all dependencies are updated
     'data': [

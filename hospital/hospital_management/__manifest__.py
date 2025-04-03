@@ -2,7 +2,7 @@
     'name': 'Hospital Management',
     'version': '1.0',
     'summary': 'A module for managing hospital operations',
-    'author': 'Inovertis Solutions',
+    'author': 'Techvertis',
     'category': 'Healthcare',
     'depends': ['base', 'mail', 'sale', 'board', 'website'],  # Ensure all dependencies are updated
     'data': [

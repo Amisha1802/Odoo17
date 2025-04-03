@@ -7,7 +7,7 @@
     'summary': 'Importing the hr_employee csv',
     'description': """
     """,
-    'author': '',
+    'author': 'Techvertis',
     'category': 'Human Resource',
     'depends': ['base', 'hr'],
     'data': [
